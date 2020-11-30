@@ -20,7 +20,12 @@ str(data)
 ```
 
 ## What is mean total number of steps taken per day?
-
+- Histogram of the total number of steps taken each day
+```{r}
+pm1<-with(data, tapply(steps, date, sum))
+res<-data.frame(Date=ymd(names(pm1)), Steps=pm1)
+hist(res$Steps, color="green", main = "Number of steps taken each day", xlab= "Steps" )
+```
 
 
 ## What is the average daily activity pattern?

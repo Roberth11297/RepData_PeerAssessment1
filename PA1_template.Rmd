@@ -1,5 +1,6 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
+autor: "Roberth Araujo"
 output: 
   html_document:
     keep_md: true
@@ -7,8 +8,16 @@ output:
 
 
 ## Loading and preprocessing the data
-
-
+```{r}
+data<-read.csv("activity.csv", sep = ",", header = T)
+str(data)
+```
+### Date format configuration
+```{r}
+library(lubridate)
+data$date<-ymd(data$date)
+str(data)
+```
 
 ## What is mean total number of steps taken per day?
 

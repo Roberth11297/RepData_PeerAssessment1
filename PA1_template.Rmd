@@ -99,3 +99,29 @@ mediand
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
+```{r, echo=TRUE}
+data4$day <- weekdays(as.Date(data4$date))
+```
+
+
+- Weekdays dataset
+```{r, echo=TRUE}
+data6<-data4[(!data4$day %in% c("domingo","sábado")),]
+head(data6)
+```
+
+
+- Weekends dataset
+```{r, echo=TRUE}
+data7<-data4[(data4$day %in% c("domingo","sábado")),]
+head(data7)
+```
+
+- Plot
+```{r, echo=TRUE}
+par(mfrow=c(2,1), mar=c(5,4,2,1))
+data8<-aggregate(steps~interval, data6, mean)
+plot(data8$steps~data8$interval,type="l", col="red", main = "Average daily activity pattern in weekdays", xlab= "Interval", ylab = "Number of steps")
+data9<-aggregate(steps~interval, data7, mean)
+plot(data9$steps~data9$interval,type="l", col="black", main = "Average daily activity pattern in weekends", xlab= "Interval", ylab = "Number of steps")
+```

@@ -18,9 +18,8 @@ library(lubridate)
 data$date<-ymd(data$date)
 str(data)
 ```
-
 ## What is mean total number of steps taken per day?
-- Histogram of the total number of steps taken each day           
+- Histogram of the total number of steps taken each day:
 ```{r}
 data2<-with(data, tapply(steps, date, sum))
 res<-data.frame(Date=ymd(names(data2)), Steps=data2)
@@ -28,7 +27,7 @@ hist(res$Steps, col="green", main = "Number of steps taken each day", xlab= "Ste
 ```
 
 
-- Mean and median total number of steps taken per day
+- Mean and median total number of steps taken per day:
 ```{r, echo=TRUE}
 meand<-mean(res$Steps, na.rm = TRUE)
 meand
@@ -36,10 +35,19 @@ mediand<-median(res$Steps, na.rm = TRUE)
 mediand
 ```
 
-
 ## What is the average daily activity pattern?
+- Daily activity pattern
+```{r}
+data3<-aggregate(steps~interval, data, mean)
+plot(data3$steps~data3$interval,type="l", col="green", main = "Average daily activity pattern", xlab= "Interval", ylab = "Number of steps")
+```
 
 
+- The interval with the maximum number of steps is:
+```{r}
+max<-data3[which.max(data3$steps),1]
+max
+```
 
 ## Imputing missing values
 

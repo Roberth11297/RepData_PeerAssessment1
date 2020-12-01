@@ -20,11 +20,20 @@ str(data)
 ```
 
 ## What is mean total number of steps taken per day?
-- Histogram of the total number of steps taken each day
+- Histogram of the total number of steps taken each day           
 ```{r}
-pm1<-with(data, tapply(steps, date, sum))
-res<-data.frame(Date=ymd(names(pm1)), Steps=pm1)
-hist(res$Steps, color="green", main = "Number of steps taken each day", xlab= "Steps" )
+data2<-with(data, tapply(steps, date, sum))
+res<-data.frame(Date=ymd(names(data2)), Steps=data2)
+hist(res$Steps, col="green", main = "Number of steps taken each day", xlab= "Steps")
+```
+
+
+- Mean and median total number of steps taken per day
+```{r, echo=TRUE}
+meand<-mean(res$Steps, na.rm = TRUE)
+meand
+mediand<-median(res$Steps, na.rm = TRUE)
+mediand
 ```
 
 
